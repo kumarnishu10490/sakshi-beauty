@@ -12,6 +12,10 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import WhatsAppButton from "./components/WhatsAppButton";
+import AISkinAnalysisPage from "./pages/AISkinAnalysisPage";
+import AIHairstylePage from "./pages/AIHairstylePage";
+import AIBeautyConsultantPage from "./pages/AIBeautyConsultantPage";
+import AICourseAdvisorPage from "./pages/AICourseAdvisorPage";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +33,10 @@ const App = () => (
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/ai/skin-analysis" element={<AISkinAnalysisPage />} />
+            <Route path="/ai/hairstyle" element={<AIHairstylePage />} />
+            <Route path="/ai/consultant" element={<AIBeautyConsultantPage />} />
+            <Route path="/ai/course-advisor" element={<AICourseAdvisorPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
