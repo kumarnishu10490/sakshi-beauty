@@ -1,23 +1,31 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import FloatingParticles from "../FloatingParticles";
 import heroImg from "@/assets/hero-salon.jpg";
 
 const HeroSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero">
       <FloatingParticles count={30} />
       
-      {/* Background image with overlay */}
-      <div className="absolute inset-0">
+      {/* Background image with parallax */}
+      <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
           src={heroImg}
           alt="Sakshi Beauty Parlour luxury interior"
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-20 scale-110"
           loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-cream/90 via-cream/70 to-transparent" />
-      </div>
+      </motion.div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
