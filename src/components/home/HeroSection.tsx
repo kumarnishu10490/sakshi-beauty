@@ -30,7 +30,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blush/50 text-primary text-sm font-medium mb-6"
           >
-            ✨ Premium Beauty & Training
+            ✨ Sakshi Beauty Parlour & Training Centre
           </motion.div>
 
           <motion.h1
