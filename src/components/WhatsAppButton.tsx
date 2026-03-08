@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
 
 const WHATSAPP_NUMBER = "919XXXXXXXXX"; // Replace with actual number
 const MESSAGE = "Hi! I'd like to book an appointment at Sakshi Beauty Parlour.";
