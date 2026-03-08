@@ -33,7 +33,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <Sparkles className="w-6 h-6 text-primary group-hover:text-gold transition-colors" />
+          <img src="/logo.png" alt="Sakshi Beauty Logo" className="w-9 h-9 object-contain" />
           <span className="font-heading text-xl font-bold text-foreground">
             Sakshi <span className="text-gradient-gold">Beauty</span>
           </span>
