@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles, ChevronDown } from "lucide-react";
+import { Menu, X, Sparkles, ChevronDown, Phone } from "lucide-react";
 
 const navLinks = [
   { path: "/", label: "Home" },
@@ -97,6 +97,9 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
+          <a href="tel:+919XXXXXXXXX" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <Phone className="w-4 h-4" /> Call Now
+          </a>
           <Link to="/contact" className="btn-luxury text-sm !px-6 !py-2.5">
             Book Now
           </Link>
