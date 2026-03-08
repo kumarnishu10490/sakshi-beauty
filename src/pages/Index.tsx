@@ -5,6 +5,8 @@ import HeroSection from "@/components/home/HeroSection";
 import ScrollTransformationStory from "@/components/home/ScrollTransformationStory";
 import ServicesPreview from "@/components/home/ServicesPreview";
 import CoursesPreview from "@/components/home/CoursesPreview";
+import AIFeaturesShowcase from "@/components/home/AIFeaturesShowcase";
+import AnimatedStatsCounter from "@/components/home/AnimatedStatsCounter";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import Testimonials from "@/components/home/Testimonials";
 import CTASection from "@/components/home/CTASection";
@@ -18,6 +20,8 @@ const Index = () => {
         <ScrollTransformationStory />
         <ServicesPreview />
         <CoursesPreview />
+        <AIFeaturesShowcase />
+        <AnimatedStatsCounter />
         <WhyChooseUs />
         <Testimonials />
         <CTASection />
