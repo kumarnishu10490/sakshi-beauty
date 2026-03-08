@@ -32,9 +32,9 @@ const Navbar = () => {
       className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border/30"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <img src="/logo.png" alt="Sakshi Beauty Logo" className="w-9 h-9 object-contain" />
-          <span className="font-heading text-xl font-bold text-foreground">
+        <Link to="/" className="flex items-center gap-1.5 sm:gap-2 group">
+          <img src="/logo.png" alt="Sakshi Beauty Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+          <span className="font-heading text-lg sm:text-xl font-bold text-foreground">
             Sakshi <span className="text-gradient-gold">Beauty</span>
           </span>
         </Link>
