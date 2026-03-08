@@ -43,28 +43,28 @@ const ServicesPage = () => {
 
         {/* Services Grid */}
         <section className="section-padding bg-background">
-          <div className="max-w-7xl mx-auto space-y-16">
+          <div className="max-w-7xl mx-auto space-y-10 md:space-y-16">
             {allServices.map((service, i) => (
               <AnimatedSection key={service.title} direction={i % 2 === 0 ? "left" : "right"}>
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${i % 2 !== 0 ? "lg:direction-rtl" : ""}`}>
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center ${i % 2 !== 0 ? "lg:direction-rtl" : ""}`}>
                   <div className={i % 2 !== 0 ? "lg:order-2" : ""}>
                     <motion.div
                       whileHover={{ scale: 1.02 }}
-                      className="rounded-3xl overflow-hidden shadow-lg"
+                      className="rounded-2xl md:rounded-3xl overflow-hidden shadow-lg"
                     >
-                      <img src={service.img} alt={service.title} className="w-full h-80 object-cover" loading="lazy" />
+                      <img src={service.img} alt={service.title} className="w-full h-48 sm:h-64 lg:h-80 object-cover" loading="lazy" />
                     </motion.div>
                   </div>
                   <div className={i % 2 !== 0 ? "lg:order-1" : ""}>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-2xl bg-blush flex items-center justify-center">
-                        <service.icon className="w-6 h-6 text-primary" />
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blush flex items-center justify-center shrink-0">
+                        <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                       </div>
-                      <h2 className="font-heading text-3xl font-bold text-foreground">{service.title}</h2>
+                      <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{service.title}</h2>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed mb-4">{service.desc}</p>
-                    <p className="text-lg font-heading font-semibold text-gradient-gold mb-6">{service.price}</p>
-                    <Link to="/contact" className="btn-luxury inline-block">
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-3 md:mb-4">{service.desc}</p>
+                    <p className="text-base sm:text-lg font-heading font-semibold text-gradient-gold mb-4 md:mb-6">{service.price}</p>
+                    <Link to="/contact" className="btn-luxury inline-block text-sm sm:text-base">
                       Book Appointment
                     </Link>
                   </div>
