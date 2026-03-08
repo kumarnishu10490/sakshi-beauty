@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import FloatingParticles from "../FloatingParticles";
 import heroImg from "@/assets/hero-salon.jpg";
