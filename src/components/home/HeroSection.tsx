@@ -97,7 +97,7 @@ const HeroSection = () => {
             <img
               src={heroImg}
               alt="Sakshi Beauty Parlour interior"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-blush/20" />
             <div className="absolute bottom-6 left-6 right-6 backdrop-blur-md bg-white/20 rounded-2xl p-5 border border-white/30">
