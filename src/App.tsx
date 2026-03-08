@@ -32,6 +32,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
+        <WhatsAppButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
