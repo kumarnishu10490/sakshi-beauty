@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <img src="/logo.png" alt="Sakshi Beauty Logo" className="w-10 h-10 object-contain brightness-0 invert" />
-              <span className="font-heading text-xl font-bold">
+              <img src="/logo.png" alt="Sakshi Beauty Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain brightness-0 invert" />
+              <span className="font-heading text-lg sm:text-xl font-bold">
                 Sakshi Beauty
               </span>
             </div>
