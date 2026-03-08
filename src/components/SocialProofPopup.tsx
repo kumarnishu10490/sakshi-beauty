@@ -46,7 +46,7 @@ const SocialProofPopup = () => {
   const proof = proofs[current];
 
   return (
-    <div className="fixed bottom-24 left-4 z-40 max-w-xs">
+    <div className="fixed bottom-28 sm:bottom-24 left-3 sm:left-4 z-40 max-w-[280px] sm:max-w-xs">
       <AnimatePresence>
         {visible && (
           <motion.div
