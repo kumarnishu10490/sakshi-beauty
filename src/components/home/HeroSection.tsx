@@ -1,10 +1,7 @@
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import FloatingParticles from "../FloatingParticles";
 import heroImg from "@/assets/hero-salon.jpg";
-
-const Hero3DScene = lazy(() => import("./Hero3DScene"));
 
 const HeroSection = () => {
   return (
