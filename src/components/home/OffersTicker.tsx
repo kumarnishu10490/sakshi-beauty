@@ -15,7 +15,7 @@ const OffersTicker = () => {
   const doubled = [...offers, ...offers];
 
   return (
-    <div className="bg-foreground overflow-hidden py-2 md:py-2.5 relative mt-[72px]">
+    <div className="bg-foreground overflow-hidden py-2 md:py-2.5 relative">
       {/* Fade edges */}
       <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-foreground to-transparent z-10" />
       <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-foreground to-transparent z-10" />
