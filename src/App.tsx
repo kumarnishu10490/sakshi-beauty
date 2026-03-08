@@ -16,6 +16,7 @@ import AISkinAnalysisPage from "./pages/AISkinAnalysisPage";
 import AIHairstylePage from "./pages/AIHairstylePage";
 import AIBeautyConsultantPage from "./pages/AIBeautyConsultantPage";
 import AICourseAdvisorPage from "./pages/AICourseAdvisorPage";
+import PriceCalculatorPage from "./pages/PriceCalculatorPage";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/ai/hairstyle" element={<AIHairstylePage />} />
             <Route path="/ai/consultant" element={<AIBeautyConsultantPage />} />
             <Route path="/ai/course-advisor" element={<AICourseAdvisorPage />} />
+            <Route path="/price-calculator" element={<PriceCalculatorPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
