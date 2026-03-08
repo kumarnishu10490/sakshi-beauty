@@ -4,23 +4,22 @@ import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Upload, Camera, Sparkles, Droplets, Sun, Shield, AlertCircle } from "lucide-react";
+import { Camera, Sparkles, Droplets, Sun, Shield, AlertCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
-const mockResults = {
-  skinType: "Combination Skin",
-  concerns: ["Oily T-zone", "Dry cheeks", "Mild pigmentation"],
-  recommendations: [
-    { title: "Gold Facial", desc: "Deep cleansing + glow boost for combination skin", icon: Sparkles },
-    { title: "Hydra Facial", desc: "Intense hydration for dry areas", icon: Droplets },
-    { title: "De-Tan Treatment", desc: "Remove sun damage & even skin tone", icon: Sun },
-    { title: "Anti-Pigmentation Pack", desc: "Targeted treatment for dark spots", icon: Shield },
-  ],
+type SkinResult = {
+  skinType: string;
+  concerns: string[];
+  recommendations: { title: string; desc: string; price: string }[];
 };
+
+const iconMap = [Sparkles, Droplets, Sun, Shield];
 
 const AISkinAnalysisPage = () => {
   const [image, setImage] = useState<string | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
-  const [results, setResults] = useState<typeof mockResults | null>(null);
+  const [results, setResults] = useState<SkinResult | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,12 +33,33 @@ const AISkinAnalysisPage = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     setAnalyzing(true);
-    setTimeout(() => {
-      setResults(mockResults);
+    try {
+      const { data, error } = await supabase.functions.invoke("beauty-ai", {
+        body: {
+          type: "skin-analysis",
+          userMessage: "Please analyze my skin. I have uploaded a selfie. Based on general Indian skin types, give me a detailed analysis with treatment recommendations available at Sakshi Beauty Parlour.",
+        },
+      });
+
+      if (error) throw error;
+
+      const content = data?.result || "";
+      // Extract JSON from response
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        setResults(parsed);
+      } else {
+        toast.error("Could not parse AI response. Please try again.");
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err?.message || "Analysis failed. Please try again.");
+    } finally {
       setAnalyzing(false);
-    }, 2500);
+    }
   };
 
   return (
@@ -62,7 +82,6 @@ const AISkinAnalysisPage = () => {
 
         <section className="section-padding bg-background">
           <div className="max-w-4xl mx-auto">
-            {/* Upload Area */}
             <AnimatedSection>
               <div
                 onClick={() => fileRef.current?.click()}
@@ -91,8 +110,8 @@ const AISkinAnalysisPage = () => {
                 <button onClick={handleAnalyze} disabled={analyzing} className="btn-luxury inline-flex items-center gap-2">
                   {analyzing ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      Analyzing...
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      AI Analyzing...
                     </>
                   ) : (
                     <>
@@ -104,7 +123,6 @@ const AISkinAnalysisPage = () => {
               </motion.div>
             )}
 
-            {/* Results */}
             <AnimatePresence>
               {results && (
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="mt-12 space-y-8">
@@ -122,22 +140,29 @@ const AISkinAnalysisPage = () => {
 
                   <h3 className="font-heading text-xl font-bold text-foreground text-center">Recommended Treatments</h3>
                   <div className="grid sm:grid-cols-2 gap-6">
-                    {results.recommendations.map((rec, i) => (
-                      <motion.div
-                        key={rec.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.15 }}
-                        className="glass-card-hover rounded-2xl p-6"
-                      >
-                        <rec.icon className="w-8 h-8 text-primary mb-3" />
-                        <h4 className="font-heading text-lg font-semibold text-foreground">{rec.title}</h4>
-                        <p className="text-sm text-muted-foreground mt-1">{rec.desc}</p>
-                      </motion.div>
-                    ))}
+                    {results.recommendations.map((rec, i) => {
+                      const Icon = iconMap[i % iconMap.length];
+                      return (
+                        <motion.div
+                          key={rec.title}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.15 }}
+                          className="glass-card-hover rounded-2xl p-6"
+                        >
+                          <Icon className="w-8 h-8 text-primary mb-3" />
+                          <h4 className="font-heading text-lg font-semibold text-foreground">{rec.title}</h4>
+                          <p className="text-sm text-muted-foreground mt-1">{rec.desc}</p>
+                          {rec.price && <p className="text-sm font-semibold text-primary mt-2">{rec.price}</p>}
+                        </motion.div>
+                      );
+                    })}
                   </div>
 
-                  <div className="text-center mt-8">
+                  <div className="text-center mt-8 space-y-3">
+                    <button onClick={() => { setResults(null); setImage(null); }} className="btn-outline-luxury text-sm !px-6 !py-2.5">
+                      Analyze Again
+                    </button>
                     <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
                       <AlertCircle className="w-3 h-3" /> AI analysis is for guidance only. Visit us for professional consultation.
                     </p>

@@ -4,7 +4,9 @@ import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { GraduationCap, Clock, Star, ArrowRight, CheckCircle2 } from "lucide-react";
+import { GraduationCap, Clock, Star, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const questions = [
   {
@@ -25,33 +27,14 @@ const questions = [
   },
 ];
 
-const courseResults: Record<string, { title: string; duration: string; match: string; highlights: string[] }[]> = {
-  default: [
-    {
-      title: "Complete Beauty Professional Course",
-      duration: "6 Months",
-      match: "95%",
-      highlights: ["All beauty techniques", "Business training", "Certificate included", "Placement support"],
-    },
-    {
-      title: "Bridal Makeup Specialist",
-      duration: "3 Months",
-      match: "88%",
-      highlights: ["HD & Airbrush makeup", "Bridal hairstyling", "Draping techniques", "Portfolio building"],
-    },
-    {
-      title: "Quick Start Beauty Course",
-      duration: "1 Month",
-      match: "82%",
-      highlights: ["Basic makeup & hair", "Skin care fundamentals", "Self-grooming skills", "Practical sessions"],
-    },
-  ],
-};
+type CourseResult = { title: string; duration: string; match: string; highlights: string[] };
 
 const AICourseAdvisorPage = () => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [courses, setCourses] = useState<CourseResult[]>([]);
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers, answer];
@@ -59,7 +42,41 @@ const AICourseAdvisorPage = () => {
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
-      setTimeout(() => setShowResults(true), 800);
+      fetchRecommendations(newAnswers);
+    }
+  };
+
+  const fetchRecommendations = async (allAnswers: string[]) => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("beauty-ai", {
+        body: {
+          type: "course-advisor",
+          userMessage: `Here are my preferences:
+- Interest area: ${allAnswers[0]}
+- Experience level: ${allAnswers[1]}
+- Time commitment: ${allAnswers[2]}
+- Career goal: ${allAnswers[3]}
+
+Please recommend the best 3 beauty courses available at Sakshi Beauty Parlour & Training Centre.`,
+        },
+      });
+
+      if (error) throw error;
+
+      const content = data?.result || "";
+      const jsonMatch = content.match(/\[[\s\S]*\]/);
+      if (jsonMatch) {
+        setCourses(JSON.parse(jsonMatch[0]));
+        setShowResults(true);
+      } else {
+        toast.error("Could not parse AI response. Please try again.");
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err?.message || "Failed to get recommendations.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,9 +84,10 @@ const AICourseAdvisorPage = () => {
     setStep(0);
     setAnswers([]);
     setShowResults(false);
+    setCourses([]);
   };
 
-  const progress = ((answers.length) / questions.length) * 100;
+  const progress = (answers.length / questions.length) * 100;
 
   return (
     <PageTransition>
@@ -92,9 +110,20 @@ const AICourseAdvisorPage = () => {
         <section className="section-padding bg-background">
           <div className="max-w-2xl mx-auto">
             <AnimatePresence mode="wait">
-              {!showResults ? (
-                <motion.div key={`q-${step}`} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.3 }}>
-                  {/* Progress */}
+              {loading ? (
+                <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-16">
+                  <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
+                  <p className="font-heading text-xl font-semibold text-foreground">AI aapke liye best courses dhundh raha hai...</p>
+                  <p className="text-muted-foreground mt-2 text-sm">Based on: {answers.join(", ")}</p>
+                </motion.div>
+              ) : !showResults ? (
+                <motion.div
+                  key={`q-${step}`}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -40 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <div className="mb-8">
                     <div className="flex justify-between text-sm text-muted-foreground mb-2">
                       <span>Question {step + 1} of {questions.length}</span>
@@ -111,7 +140,6 @@ const AICourseAdvisorPage = () => {
                     </div>
                   </div>
 
-                  {/* Question */}
                   <div className="glass-card rounded-3xl p-8">
                     <h3 className="font-heading text-2xl font-bold text-foreground mb-6">
                       {questions[step].question}
@@ -132,7 +160,6 @@ const AICourseAdvisorPage = () => {
                     </div>
                   </div>
 
-                  {/* Answers so far */}
                   {answers.length > 0 && (
                     <div className="mt-6 flex flex-wrap gap-2">
                       {answers.map((a, i) => (
@@ -150,10 +177,10 @@ const AICourseAdvisorPage = () => {
                       <GraduationCap className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="font-heading text-2xl font-bold text-foreground">Your Perfect Courses</h3>
-                    <p className="text-muted-foreground mt-2">Based on your interests: {answers.join(", ")}</p>
+                    <p className="text-muted-foreground mt-2">Based on: {answers.join(", ")}</p>
                   </div>
 
-                  {courseResults.default.map((course, i) => (
+                  {courses.map((course, i) => (
                     <motion.div
                       key={course.title}
                       initial={{ opacity: 0, y: 20 }}
@@ -165,8 +192,12 @@ const AICourseAdvisorPage = () => {
                         <div>
                           <h4 className="font-heading text-xl font-bold text-foreground">{course.title}</h4>
                           <div className="flex items-center gap-3 mt-1 text-sm text-muted-foreground">
-                            <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {course.duration}</span>
-                            <span className="flex items-center gap-1"><Star className="w-3.5 h-3.5 text-gold" /> Match: {course.match}</span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="w-3.5 h-3.5" /> {course.duration}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Star className="w-3.5 h-3.5 text-gold" /> Match: {course.match}
+                            </span>
                           </div>
                         </div>
                         <span className="text-2xl font-bold text-gradient-gold">{course.match}</span>
