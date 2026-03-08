@@ -158,7 +158,7 @@ const GalleryPage = () => {
       </AnimatePresence>
 
       <Footer />
-    </motion.div>
+    </PageTransition>
   );
 };
 

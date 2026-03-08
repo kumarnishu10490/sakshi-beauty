@@ -74,7 +74,7 @@ const ServicesPage = () => {
         </section>
       </main>
       <Footer />
-    </motion.div>
+    </PageTransition>
   );
 };
 

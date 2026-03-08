@@ -120,7 +120,7 @@ const CoursesPage = () => {
         </section>
       </main>
       <Footer />
-    </motion.div>
+    </PageTransition>
   );
 };
 
