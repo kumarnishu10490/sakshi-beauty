@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -16,7 +17,7 @@ const ContactPage = () => {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <PageTransition>
       <Navbar />
       <main>
         <section className="pt-32 pb-16 bg-gradient-hero section-padding">
@@ -142,7 +143,7 @@ const ContactPage = () => {
         </section>
       </main>
       <Footer />
-    </motion.div>
+    </PageTransition>
   );
 };
 
