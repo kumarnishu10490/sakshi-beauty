@@ -1,7 +1,10 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import FloatingParticles from "../FloatingParticles";
 import heroImg from "@/assets/hero-salon.jpg";
+
+const Hero3DScene = lazy(() => import("./Hero3DScene"));
 
 const HeroSection = () => {
   return (
@@ -92,14 +95,17 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="hidden lg:block relative"
         >
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl animate-pulse-glow">
-            <img
-              src={heroImg}
-              alt="Luxury beauty salon"
-              className="w-full h-[500px] object-cover"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+          {/* 3D Makeup Brush Scene */}
+          <div className="relative h-[500px] rounded-3xl overflow-hidden animate-pulse-glow">
+            <Suspense
+              fallback={
+                <div className="w-full h-full flex items-center justify-center bg-blush/20 rounded-3xl">
+                  <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+                </div>
+              }
+            >
+              <Hero3DScene />
+            </Suspense>
           </div>
           {/* Floating accent */}
           <motion.div
