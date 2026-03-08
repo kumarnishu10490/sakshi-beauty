@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import FloatingParticles from "../FloatingParticles";
+import Hero3DScene from "./Hero3DScene";
 import heroImg from "@/assets/hero-salon.jpg";
 
 const HeroSection = () => {
@@ -98,21 +99,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.9, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="hidden lg:block relative"
+          className="hidden lg:block relative h-[500px]"
         >
-          {/* Salon Interior Photo with Glass Effect */}
-          <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-elegant">
-            <img
-              src={heroImg}
-              alt="Sakshi Beauty Parlour interior"
-              className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-blush/20" />
-            <div className="absolute bottom-6 left-6 right-6 backdrop-blur-md bg-white/20 rounded-2xl p-5 border border-white/30">
-              <p className="font-heading text-lg text-white font-semibold">Sakshi Beauty Parlour</p>
-              <p className="text-white/80 text-sm">Where beauty meets excellence ✨</p>
-            </div>
-          </div>
+          <Hero3DScene />
           {/* Floating accent */}
           <motion.div
             animate={{ y: [-10, 10, -10] }}
