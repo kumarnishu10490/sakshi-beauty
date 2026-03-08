@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/home/HeroSection";
@@ -11,12 +11,7 @@ import CTASection from "@/components/home/CTASection";
 
 const Index = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-    >
+    <PageTransition>
       <Navbar />
       <main>
         <HeroSection />
@@ -28,7 +23,7 @@ const Index = () => {
         <CTASection />
       </main>
       <Footer />
-    </motion.div>
+    </PageTransition>
   );
 };
 
