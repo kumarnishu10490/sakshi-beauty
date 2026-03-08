@@ -4,21 +4,16 @@ import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Upload, Camera, Scissors, Sparkles } from "lucide-react";
+import { Camera, Scissors, Sparkles, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
-const mockHairstyles = [
-  { name: "Layered Bob", match: "92%", desc: "A chic layered bob that frames your face shape beautifully" },
-  { name: "Soft Waves", match: "88%", desc: "Romantic soft waves for an effortless glamorous look" },
-  { name: "Sleek Straight", match: "85%", desc: "Classic sleek straight hair with a polished finish" },
-  { name: "Curtain Bangs", match: "82%", desc: "Trendy curtain bangs to highlight your features" },
-  { name: "Messy Bun Updo", match: "78%", desc: "Elegant messy bun perfect for parties & events" },
-  { name: "Side Swept", match: "75%", desc: "Glamorous side swept style for a dramatic look" },
-];
+type HairstyleResult = { name: string; match: string; desc: string };
 
 const AIHairstylePage = () => {
   const [image, setImage] = useState<string | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
-  const [results, setResults] = useState<typeof mockHairstyles | null>(null);
+  const [results, setResults] = useState<HairstyleResult[] | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -34,12 +29,31 @@ const AIHairstylePage = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     setAnalyzing(true);
-    setTimeout(() => {
-      setResults(mockHairstyles);
+    try {
+      const { data, error } = await supabase.functions.invoke("beauty-ai", {
+        body: {
+          type: "hairstyle",
+          userMessage: "Based on a typical Indian woman's face, suggest the best trending hairstyles. Consider different face shapes and hair textures common in India. Give me 6 hairstyle suggestions with match percentages.",
+        },
+      });
+
+      if (error) throw error;
+
+      const content = data?.result || "";
+      const jsonMatch = content.match(/\[[\s\S]*\]/);
+      if (jsonMatch) {
+        setResults(JSON.parse(jsonMatch[0]));
+      } else {
+        toast.error("Could not parse AI response. Please try again.");
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err?.message || "Analysis failed. Please try again.");
+    } finally {
       setAnalyzing(false);
-    }, 2000);
+    }
   };
 
   return (
@@ -63,7 +77,6 @@ const AIHairstylePage = () => {
         <section className="section-padding bg-background">
           <div className="max-w-5xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* Upload */}
               <AnimatedSection>
                 <div
                   onClick={() => fileRef.current?.click()}
@@ -87,7 +100,7 @@ const AIHairstylePage = () => {
                     <button onClick={handleAnalyze} disabled={analyzing} className="btn-luxury inline-flex items-center gap-2">
                       {analyzing ? (
                         <>
-                          <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                          <Loader2 className="w-5 h-5 animate-spin" />
                           Finding styles...
                         </>
                       ) : (
@@ -101,7 +114,6 @@ const AIHairstylePage = () => {
                 )}
               </AnimatedSection>
 
-              {/* Results */}
               <div>
                 <AnimatePresence>
                   {results && (
@@ -130,6 +142,11 @@ const AIHairstylePage = () => {
                           </div>
                         </motion.div>
                       ))}
+                      <div className="text-center mt-6">
+                        <button onClick={() => { setResults(null); setImage(null); }} className="text-sm text-primary underline hover:text-primary/80">
+                          Try Again
+                        </button>
+                      </div>
                       <p className="text-xs text-muted-foreground text-center mt-4">
                         Visit Sakshi Beauty Parlour to get your perfect hairstyle! ✨
                       </p>
