@@ -92,17 +92,18 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="hidden lg:block relative"
         >
-          {/* 3D Makeup Brush Scene */}
-          <div className="relative h-[500px] rounded-3xl overflow-hidden animate-pulse-glow">
-            <Suspense
-              fallback={
-                <div className="w-full h-full flex items-center justify-center bg-blush/20 rounded-3xl">
-                  <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
-                </div>
-              }
-            >
-              <Hero3DScene />
-            </Suspense>
+          {/* Salon Interior Photo with Glass Effect */}
+          <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-elegant">
+            <img
+              src={heroImg}
+              alt="Sakshi Beauty Parlour interior"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-blush/20" />
+            <div className="absolute bottom-6 left-6 right-6 backdrop-blur-md bg-white/20 rounded-2xl p-5 border border-white/30">
+              <p className="font-heading text-lg text-white font-semibold">Sakshi Beauty Parlour</p>
+              <p className="text-white/80 text-sm">Where beauty meets excellence ✨</p>
+            </div>
           </div>
           {/* Floating accent */}
           <motion.div
