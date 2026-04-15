@@ -1,7 +1,25 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Sparkles, Phone, MapPin, Mail, Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
+
+  const [contact, setContact] = useState({
+  phone: "9304825053",
+  email: "Rubeeyadav10490@gmail.com",
+  address: " Pali road, jhabar, Dipka , Korba , Chhattisgarh-495452",
+  instagram: "sakshi_beauty_parlour202",
+  facebook: "",
+});
+
+useEffect(() => {
+  fetch("http://localhost:5000/api/contact")
+    .then((res) => res.json())
+    .then((data) => { if (data) setContact(data); })
+    .catch(() => {});
+}, []);
+
+
   return (
     <footer className="bg-foreground text-primary-foreground">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -49,18 +67,20 @@ const Footer = () => {
             <div className="flex flex-col gap-3 text-sm opacity-70">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-gold" />
-                <span>+91 98765 43210</span>
+                <span>{contact.phone}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-gold" />
-                <span>info@sakshibeauty.com</span>
+                <span>{contact.email} </span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-gold mt-0.5" />
-                <span>123 Beauty Lane, Mumbai, India</span>
+                <span>{contact.address} </span>
               </div>
               <div className="flex items-center gap-3 mt-2">
-                <Instagram className="w-5 h-5 hover:text-gold transition-colors cursor-pointer" />
+                <a href={`https://instagram.com/${contact.instagram}`} target="_blank" rel="noreferrer">
+  <Instagram className="w-5 h-5 hover:text-gold transition-colors cursor-pointer" />
+</a>
                 <Facebook className="w-5 h-5 hover:text-gold transition-colors cursor-pointer" />
               </div>
             </div>

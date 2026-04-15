@@ -33,15 +33,20 @@ const ScrollTransformationStory = () => {
     offset: ["start end", "end start"],
   });
 
-  const opacity1 = useTransform(scrollYProgress, [0, 0.15, 0.3], [0, 1, 0.3]);
-  const opacity2 = useTransform(scrollYProgress, [0.25, 0.45, 0.6], [0, 1, 0.3]);
-  const opacity3 = useTransform(scrollYProgress, [0.5, 0.7, 0.85], [0, 1, 1]);
-  const opacities = [opacity1, opacity2, opacity3];
+  const opacity1 = useTransform(scrollYProgress, [0, 0.05, 0.30, 0.40], [1, 1, 1, 0]);
+const opacity2 = useTransform(scrollYProgress, [0.35, 0.45, 0.60, 0.70], [0, 1, 1, 0]);
+const opacity3 = useTransform(scrollYProgress, [0.65, 0.75, 0.90, 1.0], [0, 1, 1, 1]);
+const opacities = [opacity1, opacity2, opacity3];
 
-  const scale1 = useTransform(scrollYProgress, [0, 0.15, 0.3], [0.8, 1, 0.95]);
-  const scale2 = useTransform(scrollYProgress, [0.25, 0.45, 0.6], [0.8, 1, 0.95]);
-  const scale3 = useTransform(scrollYProgress, [0.5, 0.7, 0.85], [0.8, 1, 1]);
-  const scales = [scale1, scale2, scale3];
+const scale1 = useTransform(scrollYProgress, [0, 0.05, 0.30, 0.40], [1, 1, 1, 0.95]);
+const scale2 = useTransform(scrollYProgress, [0.35, 0.45, 0.60, 0.70], [0.93, 1, 1, 0.95]);
+const scale3 = useTransform(scrollYProgress, [0.65, 0.75, 0.90, 1.0], [0.93, 1, 1, 1]);
+const scales = [scale1, scale2, scale3];
+
+const y1 = useTransform(scrollYProgress, [0, 0.05, 0.30, 0.40], ["0px", "0px", "0px", "-40px"]);
+const y2 = useTransform(scrollYProgress, [0.35, 0.45, 0.60, 0.70], ["60px", "0px", "0px", "-40px"]);
+const y3 = useTransform(scrollYProgress, [0.65, 0.75, 0.90, 1.0], ["60px", "0px", "0px", "0px"]);
+const ys = [y1, y2, y3];
 
   const progressWidth = useTransform(scrollYProgress, [0, 0.85], ["0%", "100%"]);
 
@@ -77,13 +82,13 @@ const ScrollTransformationStory = () => {
       </div>
 
       {/* Stages */}
-      <div className="min-h-[200vh] relative px-6 md:px-12 lg:px-20 py-16">
+      <div className="min-h-[400vh] relative px-6 md:px-12 lg:px-20 py-16">
         <div className="sticky top-32 max-w-7xl mx-auto">
           <div className="relative min-h-[70vh] flex items-center">
             {stages.map((stage, i) => (
               <motion.div
                 key={stage.step}
-                style={{ opacity: opacities[i], scale: scales[i] }}
+                style={{ opacity: opacities[i], scale: scales[i] , y: ys[i]}}
                 className="absolute inset-0 flex items-center"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">

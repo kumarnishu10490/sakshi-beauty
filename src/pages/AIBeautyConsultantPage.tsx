@@ -226,10 +226,6 @@ const AIBeautyConsultantPage = () => {
                 </form>
               </div>
             </div>
-
-            <p className="text-xs text-muted-foreground text-center mt-4 flex items-center justify-center gap-1">
-              <Sparkles className="w-3 h-3" /> Powered by Lovable AI
-            </p>
           </div>
         </section>
       </main>

@@ -12,6 +12,8 @@ import facialImg from "@/assets/facial-care.jpg";
 import hairSmoothImg from "@/assets/hair-smoothening.jpg";
 import partyImg from "@/assets/party-makeup.jpg";
 import heroImg from "@/assets/hero-salon.jpg";
+import img1 from "@/assets/img1.jpeg";
+import img2 from "@/assets/img2.jpeg";
 
 const galleryImages = [
   { src: bridalImg, title: "Bridal Elegance", category: "Bridal" },
@@ -22,6 +24,9 @@ const galleryImages = [
   { src: partyImg, title: "Party Glamour", category: "Makeup" },
   { src: heroImg, title: "Our Studio", category: "Studio" },
   { src: bridalImg, title: "Bridal Perfection", category: "Bridal" },
+  { src: img1, title: "Our Studio", category: "Studio" },
+  { src: img2, title: "Bridal Perfection", category: "Bridal" },
+ 
 ];
 
 const categories = ["All", "Bridal", "Hair", "Makeup", "Mehndi", "Skincare", "Studio"];

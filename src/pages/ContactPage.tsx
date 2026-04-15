@@ -129,13 +129,8 @@ const ContactPage = () => {
 
                 {/* Map placeholder */}
                 <div className="rounded-2xl overflow-hidden h-64 bg-muted flex items-center justify-center">
-                  <iframe
-                    title="Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin"
-                    className="w-full h-full border-0"
-                    loading="lazy"
-                    allowFullScreen
-                  />
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.8438068966225!2d82.51126717529422!3d22.359525779644112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a27f49cc0524b31%3A0x61ef4b46f062b6ad!2sPali%20Rd%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1776239176227!5m2!1sen!2sin"  className="w-full h-full border-0"
+ allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
               </div>
             </AnimatedSection>
