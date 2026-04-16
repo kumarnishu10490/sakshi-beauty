@@ -10,13 +10,16 @@ const navLinks = [
   { path: "/gallery", label: "Gallery" },
   { path: "/about", label: "About" },
   { path: "/contact", label: "Contact" },
+   { path: "/admin", label: "Admin" }
+  ,
 ];
 
 const aiLinks = [
   { path: "/ai/skin-analysis", label: "🧴 Skin Analysis" },
   { path: "/ai/hairstyle", label: "💇 Hairstyle Try-On" },
   { path: "/ai/consultant", label: "💬 Beauty Consultant" },
-  { path: "/ai/course-advisor", label: "📚 Course Advisor" },
+  { path: "/ai/course-advisor", label: "📚 Course Advisor" }
+   
 ];
 
 const Navbar = () => {

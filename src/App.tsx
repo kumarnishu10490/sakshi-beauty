@@ -17,7 +17,11 @@ import AISkinAnalysisPage from "./pages/AISkinAnalysisPage";
 import AIHairstylePage from "./pages/AIHairstylePage";
 import AIBeautyConsultantPage from "./pages/AIBeautyConsultantPage";
 import AICourseAdvisorPage from "./pages/AICourseAdvisorPage";
-
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminGallery from "./pages/admin/AdminGallery";
+import AdminContact from "./pages/admin/AdminContact";
+import AdminServices from "./pages/admin/AdminServices";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +45,12 @@ const App = () => (
             <Route path="/ai/course-advisor" element={<AICourseAdvisorPage />} />
             
             <Route path="*" element={<NotFound />} />
+{/* Admin routes */}
+            <Route path="/admin" element={<AdminLogin />} />
+<Route path="/admin/dashboard" element={<AdminDashboard />} />
+<Route path="/admin/gallery" element={<AdminGallery />} />
+<Route path="/admin/contact" element={<AdminContact />} />
+<Route path="/admin/services" element={<AdminServices />} />
           </Routes>
         </AnimatePresence>
         <WhatsAppButton />
