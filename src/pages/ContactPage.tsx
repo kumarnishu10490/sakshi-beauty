@@ -106,10 +106,10 @@ const ContactPage = () => {
             <AnimatedSection direction="right">
               <div className="space-y-6">
                 {[
-                  { icon: Phone, title: "Phone", info: "+91 98765 43210", sub: "Mon-Sat, 9am-7pm" },
-                  { icon: Mail, title: "Email", info: "info@sakshibeauty.com", sub: "We reply within 24 hours" },
-                  { icon: MapPin, title: "Address", info: "123 Beauty Lane", sub: "Mumbai, Maharashtra, India" },
-                  { icon: Clock, title: "Working Hours", info: "Mon - Sat: 9:00 AM - 7:00 PM", sub: "Sunday: Closed" },
+                  { icon: Phone, title: "Phone", info: "+91 9304825053", sub: "Sun -Sat, 6am-9pm" },
+                  { icon: Mail, title: "Email", info: "Rubeeyadav10490@gmail.com", sub: "We reply within 24 hours" },
+                  { icon: MapPin, title: "Address", info: "Pali road, jhabar, Dipka , Korba ,", sub: "Korba , Chhattisgarh-495452 India" },
+                  { icon: Clock, title: "Working Hours", info: "Sun - Sat: 6:00 AM - 9:00 PM",  },
                 ].map((item) => (
                   <motion.div
                     key={item.title}

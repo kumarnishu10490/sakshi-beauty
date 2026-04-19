@@ -34,6 +34,7 @@ export default function AdminDashboard() {
       {/* Main Content */}
       <div className="flex-1 p-10">
         <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+        <a href="/admin/services">Manage salon services</a>
 
         <div className="grid grid-cols-3 gap-6">
 

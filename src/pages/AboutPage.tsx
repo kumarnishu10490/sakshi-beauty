@@ -3,19 +3,26 @@ import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Heart, Target, Eye } from "lucide-react";
-import founderImg from "@/assets/founder.jpg";
+import { Target, Eye } from "lucide-react";
+
+// ✅ Images import karo (IMPORTANT)
 import heroImg from "@/assets/hero-salon.jpg";
+import rubiImg from "@/assets/rubi.png";
+import sakshiImg from "@/assets/sakshi.png";
 
 const AboutPage = () => {
   return (
     <PageTransition>
       <Navbar />
+
       <main>
+        {/* Hero */}
         <section className="pt-32 pb-16 bg-gradient-hero section-padding">
           <div className="max-w-7xl mx-auto text-center">
             <AnimatedSection>
-              <span className="text-sm font-medium text-primary tracking-widest uppercase">About Us</span>
+              <span className="text-sm font-medium text-primary tracking-widest uppercase">
+                About Us
+              </span>
               <h1 className="heading-display mt-3">
                 Our <span className="text-gradient-gold">Story</span>
               </h1>
@@ -23,45 +30,58 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Our Story */}
+        {/* Story */}
         <section className="section-padding bg-background">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection direction="left">
               <div className="rounded-3xl overflow-hidden shadow-lg">
-                <img src={heroImg} alt="Our salon" className="w-full h-96 object-cover" loading="lazy" />
+                <img
+                  src={heroImg}
+                  alt="Our salon"
+                  className="w-full h-96 object-cover"
+                />
               </div>
             </AnimatedSection>
+
             <AnimatedSection direction="right">
               <h2 className="heading-section mb-6">
-                A Journey of <span className="text-gradient-rose">Beauty & Passion</span>
+                A Journey of{" "}
+                <span className="text-gradient-rose">Beauty & Passion</span>
               </h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded over a decade ago, Sakshi Beauty Parlour & Training Centre began with a simple vision — 
-                to make professional beauty services and education accessible to everyone. What started as a small 
-                salon has grown into a trusted name in beauty and training.
+
+              <p className="text-muted-foreground mb-4">
+                Founded over a decade ago, Sakshi Beauty Parlour began with a
+                simple vision — to make beauty services accessible.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Today, we proudly serve hundreds of clients and have trained over 200 students who now work 
-                in salons across the country, run their own businesses, and continue to spread the art of beauty.
+
+              <p className="text-muted-foreground">
+                Today, we proudly serve hundreds of clients and have trained many
+                students.
               </p>
             </AnimatedSection>
           </div>
         </section>
 
-        {/* Mission & Vision */}
+        {/* Mission Vision */}
         <section className="section-padding bg-gradient-luxury">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
             {[
-              { icon: Target, title: "Our Mission", text: "To empower individuals with world-class beauty skills and create a community of confident, skilled beauty professionals who transform lives through their artistry." },
-              { icon: Eye, title: "Our Vision", text: "To become the leading beauty training institute recognized for excellence, innovation, and producing the most skilled beauty professionals in the industry." },
+              {
+                icon: Target,
+                title: "Our Mission",
+                text: "Empower individuals with beauty skills.",
+              },
+              {
+                icon: Eye,
+                title: "Our Vision",
+                text: "Become top beauty training institute.",
+              },
             ].map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.2}>
-                <motion.div whileHover={{ y: -6 }} className="glass-card-hover rounded-3xl p-8 h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-blush flex items-center justify-center mb-4">
-                    <item.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="font-heading text-2xl font-bold text-foreground mb-3">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{item.text}</p>
+              <AnimatedSection key={i}>
+                <motion.div className="glass-card-hover p-8 rounded-3xl">
+                  <item.icon className="mb-4" />
+                  <h3 className="text-xl font-bold">{item.title}</h3>
+                  <p>{item.text}</p>
                 </motion.div>
               </AnimatedSection>
             ))}
@@ -70,31 +90,44 @@ const AboutPage = () => {
 
         {/* Founder */}
         <section className="section-padding bg-background">
-          <div className="max-w-7xl mx-auto">
-            <AnimatedSection className="text-center mb-12">
-              <h2 className="heading-section">
-                Meet Our <span className="text-gradient-gold">Founder</span>
-              </h2>
-            </AnimatedSection>
+          <div className="max-w-7xl mx-auto space-y-10">
+
+            {/* Rubi */}
             <AnimatedSection>
-              <div className="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 max-w-3xl mx-auto">
-                <div className="w-40 h-40 rounded-full overflow-hidden flex-shrink-0 ring-4 ring-blush">
-                  <img src={founderImg} alt="Sakshi - Founder" className="w-full h-full object-cover" loading="lazy" />
-                </div>
-                <div className="text-center md:text-left">
-                  <h3 className="font-heading text-2xl font-bold text-foreground">Sakshi</h3>
-                  <p className="text-primary text-sm font-medium mb-3">Founder & Head Trainer</p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    With over 10 years of experience in the beauty industry, Sakshi has trained hundreds of students 
-                    and served thousands of clients. Her passion for beauty and dedication to teaching have made 
-                    Sakshi Beauty a name synonymous with excellence.
-                  </p>
+              <div className="glass-card p-8 flex flex-col md:flex-row items-center gap-6">
+                <img
+                  src={rubiImg}
+                  alt="Rubi Kumari - Founder"
+                  className="w-40 h-40 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="text-2xl font-bold">Rubi Kumari</h3>
+                  <p className="text-primary">Founder & Senior Trainer</p>
+                  <p>With over 10+ years of experience in the beauty industry, Rubi has trained hundreds+ of students and served thousands of clients. Her passion for beauty and dedication to teaching have made Sakshi Beauty a name synonymous with excellence..</p>
                 </div>
               </div>
             </AnimatedSection>
+
+            {/* Sakshi */}
+            <AnimatedSection>
+              <div className="glass-card p-8 flex flex-col md:flex-row items-center gap-6">
+                <img
+                  src={sakshiImg}
+                  alt="Sakshi Yadav - Co Founder "
+                  className="w-40 h-40 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="text-2xl font-bold">Sakshi Yadav</h3>
+                  <p className="text-primary">Co-Founder & Junior Trainer</p>
+                  <p>With over 3+ years of experience in the beauty industry, Sakshi has served thousands of clients. Her passion for beauty have made Sakshi Beauty a name synonymous with excellence..</p>
+                </div>
+              </div>
+            </AnimatedSection>
+
           </div>
         </section>
       </main>
+
       <Footer />
     </PageTransition>
   );

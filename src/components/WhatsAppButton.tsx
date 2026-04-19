@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 
-const WHATSAPP_NUMBER = "919XXXXXXXXX"; // Replace with actual number
+const WHATSAPP_NUMBER = "919304825053"; // Replace with actual number
 const MESSAGE = "Hi! I'd like to book an appointment at Sakshi Beauty Parlour.";
-const CALL_NUMBER = "tel:+919XXXXXXXXX"; // Replace with actual number
+const CALL_NUMBER = "tel:+919304825053"; // Replace with actual number
 
 const WhatsAppButton = () => {
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(MESSAGE)}`;

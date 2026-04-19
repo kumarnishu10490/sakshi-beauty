@@ -13,12 +13,12 @@ import hairSmoothImg from "@/assets/hair-smoothening.jpg";
 import mehndiImg from "@/assets/mehndi.jpg";
 
 const allServices = [
-  { icon: Heart, title: "Bridal Makeup", desc: "Complete bridal beauty package including makeup, hairstyling, draping assistance, and touch-ups. We create timeless bridal looks that photograph beautifully.", price: "Starting ₹15,000", img: bridalImg },
-  { icon: Sparkles, title: "Party Makeup", desc: "Glamorous makeup for engagements, receptions, sangeet, and special occasions. Stand out at every celebration.", price: "Starting ₹3,000", img: partyImg },
-  { icon: Flower2, title: "Facial & Skin Care", desc: "Premium facial treatments including gold facials, diamond facials, anti-aging treatments, and customized skincare routines.", price: "Starting ₹1,500", img: facialImg },
-  { icon: Scissors, title: "Hair Cut & Styling", desc: "Trendy haircuts, blow-dry styling, updos, and special occasion hairstyles by experienced stylists.", price: "Starting ₹500", img: hairImg },
-  { icon: Palette, title: "Hair Smoothening / Rebonding", desc: "Professional keratin treatments, smoothening, and rebonding for silky, manageable hair that lasts months.", price: "Starting ₹4,000", img: hairSmoothImg },
-  { icon: Hand, title: "Mehndi Design", desc: "Beautiful bridal and occasion mehndi designs in Arabic, Indian, and contemporary styles by skilled artists.", price: "Starting ₹2,000", img: mehndiImg },
+  { icon: Heart, title: "Bridal Makeup", desc: "Complete bridal beauty package including makeup, hairstyling, draping assistance, and touch-ups. We create timeless bridal looks that photograph beautifully.", price: "Starting ₹15,000 - 25,000", img: bridalImg },
+  { icon: Sparkles, title: "Party Makeup", desc: "Glamorous makeup for engagements, receptions, sangeet, and special occasions. Stand out at every celebration.", price: "Starting ₹1,000 - 3,000", img: partyImg },
+  { icon: Flower2, title: "Facial & Skin Care", desc: "Premium facial treatments including gold facials, diamond facials, anti-aging treatments, and customized skincare routines.", price: "Starting ₹300 - 3,500", img: facialImg },
+  { icon: Scissors, title: "Hair Cut & Styling", desc: "Trendy haircuts, blow-dry styling, updos, and special occasion hairstyles by experienced stylists.", price: "Starting ₹100 - 1,000", img: hairImg },
+  { icon: Palette, title: "Hair Smoothening / Rebonding", desc: "Professional keratin treatments, smoothening, and rebonding for silky, manageable hair that lasts months.", price: "Starting ₹1,000 - 5,000", img: hairSmoothImg },
+  { icon: Hand, title: "Mehndi Design", desc: "Beautiful bridal and occasion mehndi designs in Arabic, Indian, and contemporary styles by skilled artists.", price: "Starting ₹1,000 - 2,000", img: mehndiImg },
 ];
 
 const ServicesPage = () => {
