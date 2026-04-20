@@ -21,3 +21,8 @@ app.use("/api/gallery", require("./routes/gallery"));
 app.use("/api/services", require("./routes/services"));
 
 app.listen(5000, () => console.log("Server running on port 5000"));
+
+const galleryRoutes = require("./routes/gallery");
+
+app.use(express.json());
+app.use("/api/gallery", galleryRoutes);
