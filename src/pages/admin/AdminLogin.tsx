@@ -8,7 +8,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    if (username === "admin" && password === "admin123") {
+    if (username === "admin@gmail.com" && password === "admin123") {
       navigate("/admin/dashboard");
     } else {
       alert("Invalid credentials");
